@@ -184,7 +184,9 @@ class _MultiplayerPageState extends State<MultiplayerPage> {
                   bool isOldestX = xMoves.length >= 3 &&
                       xMoves.first[0] == row &&
                       xMoves.first[1] == col;
-
+                  bool isOldestO = oMoves.length >= 3 &&
+                      oMoves.first[0] == row &&
+                      oMoves.first[1] == col;
                   return GestureDetector(
                     onTap: () => onTileTap(row, col),
                     child: Container(
@@ -192,9 +194,9 @@ class _MultiplayerPageState extends State<MultiplayerPage> {
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: (board[row][col] == "X" &&
-                                isOldestX &&
-                                winner == "")
+                        color: ((board[row][col] == "X" && isOldestX) ||
+                                    (board[row][col] == "O" && isOldestO)) &&
+                                winner == ""
                             ? Colors.grey[850]
                             : Color(0xFF16213E),
                         borderRadius: BorderRadius.circular(8),
